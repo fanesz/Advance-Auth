@@ -1,8 +1,8 @@
 package config
 
 import (
-	"gorm.io/gorm"
 	"advanceauth/backend/app/models"
+	"gorm.io/gorm"
 )
 
 type MigratableModel interface {
@@ -13,6 +13,7 @@ var listModels = []interface{}{
 	&models.User{},
 	&models.LoggedUser{},
 	&models.ResetPassword{},
+	&models.VerifyUser{},
 }
 
 func Migrate(db *gorm.DB) error {

@@ -15,6 +15,8 @@ This is a personal project I created for learning the Go programming language. I
 - /resetpw/request - To request a password reset token
 - /resetpw/validate - To validate the password reset token
 - /resetpw/reset - To reset the password
+- /verify/resend - To resend an account verify link
+- /verify/validate - To validate the verify token
 
 ## Feature
 - Middleware - Auth middleware feature using JSON Web Token (JWT) that stores the user's UUID with an expiration date of 30 days.
@@ -24,6 +26,7 @@ This is a personal project I created for learning the Go programming language. I
 - Action termination if the JWT token stored in the client's browser is stolen and used by a different IP Address or Device, along with email notifications.
 - Password reset with a reset link sent via email with a 10-minute time limit for using the reset token and a limit of 3 request attempts with a 10-minute cooldown.
 - Automatic database migration by GORM using models.
+- Account Validator - Users can still log in, but they will have a label 'is_verified.' Users can resend the verification token to their email with a limit of 3 times per day.
 
 ## Error Code
 Equipped with Response Error Codes used in the API Response when an error occurs:
@@ -42,3 +45,6 @@ Equipped with Response Error Codes used in the API Response when an error occurs
 - [13] <b>RESETPW_MAX_LIMIT_REQUEST</b> - Maximum limit for password reset requests.
 - [14] <b>FAILED_GENERATE_JWT</b> - Failed to generate JWT.
 - [15] <b>FAILED_ENCRYPT</b> - Failed to encrypt the password.
+- [16] <b>VERIFY_INVALID_TOKEN</b> - Invalid token during validating account.
+- [17] <b>VERIFY_MAX_LIMIT_REQUEST</b> - Maximum limit for verify resend.
+- [18] <b>VERIFY_ALREADY_VERIFIED</b> - Resend a verifying token when user already verified.

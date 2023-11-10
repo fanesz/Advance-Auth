@@ -1,7 +1,6 @@
 package models
 
 import (
-	"gorm.io/gorm"
 	"time"
 )
 
@@ -14,11 +13,4 @@ type LoggedUser struct {
 	User       User   `gorm:"foreignKey:UUID;references:UUID"`
 	CreatedAt  time.Time
 	UpdatedAt  time.Time
-}
-
-func MigrateLoggedUser(db *gorm.DB) error {
-	if err := db.AutoMigrate(&LoggedUser{}); err != nil {
-		return err
-	}
-	return nil
 }

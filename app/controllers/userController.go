@@ -1,14 +1,16 @@
 package controller
 
 import (
+	"advanceauth/backend/app/handler"
+	"advanceauth/backend/app/models"
+	"advanceauth/backend/app/utils"
+	"fmt"
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 	_ "gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	"advanceauth/backend/app/handler"
-	"advanceauth/backend/app/models"
-	"advanceauth/backend/app/utils"
-	"net/http"
 )
 
 type UserController struct {
@@ -32,8 +34,9 @@ func (a *UserController) Register(c *gin.Context) {
 	req.Password = encryptResult
 
 	// create user
+	UUID := uuid.NewString()
 	user := models.User{
-		UUID:     uuid.NewString(),
+		UUID:     UUID,
 		Username: req.Username,
 		Email:    req.Email,
 		Password: req.Password,
@@ -43,6 +46,30 @@ func (a *UserController) Register(c *gin.Context) {
 	if !val {
 		return
 	}
+
+	// create verifying token
+	verifyToken := utils.GenerateRandomString(50, true, false)
+	verifyUser := models.VerifyUser{
+		VerifyToken: verifyToken,
+		EmailSent:   1,
+		UUID:        UUID,
+	}
+	queryCreateVerifying := a.Db.Create(&verifyUser)
+	val, _ = handler.QueryValidator(queryCreateVerifying, c, false)
+	if !val {
+		return
+	}
+
+	// send email verification
+	handler.SendMail(handler.MailInfo{
+		EmailTarget: req.Email,
+		Subject:     "Account Verification",
+		Body: fmt.Sprintf(
+			handler.VerifyAccount,
+			req.Username,
+			utils.GetEnv("FE_URL")+"/user/verify/"+verifyToken,
+		),
+	})
 
 	handler.Success(c, http.StatusOK, "Create Success", nil)
 }

@@ -15,6 +15,7 @@ func main() {
 	routes.AuthRoute(router, db)
 	routes.UserRoute(router, db)
 	routes.ResetPasswordRoute(router, db)
+	routes.VerifyUserRoute(router, db)
 
 	router.Run("localhost:8080")
 }

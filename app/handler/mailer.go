@@ -12,6 +12,15 @@ type MailInfo struct {
 	Body        string
 }
 
+var VerifyAccount = `
+<h4>Hi, %s</h4>
+<p>Thanks for signing up for Advance Auth! We're excited to have you as an early user.</p>
+<p>Before we get started, we just need to confirm that this is you.</p>
+<p>Click the button below to verify your email address:</p>
+<a href="%s" style="padding: 0.5rem; border: 1px solid">Verify Email</a>
+<p>Thanks,</p>
+<p>Advance Auth</p>`
+
 var NewDeviceLogin = `
 <h4>Hi,</h4>
 <p>Someone just logged in to your account from a new device.</p>
@@ -20,7 +29,7 @@ var NewDeviceLogin = `
 <p>If this was you, you can ignore this email.</p>
 <p>If this wasn't you, please change your password immediately.</p>
 <p>Thanks,</p>
-<p>Honexam</p>
+<p>Advance Auth</p>
 `
 var LoginTokenGotHacked = `
 <h4>Hi,</h4>
@@ -30,7 +39,7 @@ var LoginTokenGotHacked = `
 <p>Your login token that stored at browser cookies got stoled.</p>
 <p>We stop it from login and please secure your browser.</p>
 <p>Thanks,</p>
-<p>Honexam</p>
+<p>Advance Auth</p>
 `
 
 var ResetPassword = `
@@ -42,7 +51,7 @@ var ResetPassword = `
 <a href="%s" style="padding: 0.5rem; border: 1px solid">Reset Password</a>
 <p>If it's not you, please ignore this email.</p>
 <p>Thanks,</p>
-<p>Honexam</p>
+<p>Advance Auth</p>
 `
 
 func SendMail(mailInfo MailInfo) {
