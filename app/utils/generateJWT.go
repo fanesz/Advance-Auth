@@ -6,14 +6,13 @@ import (
 )
 
 type PayloadToken struct {
-	UUID    string
-	Expired time.Time
+	UUID string
 }
 
 func GenerateToken(UUID *PayloadToken) (string, error) {
 	claims := jwt.MapClaims{
 		"UUID": UUID,
-		"exp":  time.Now().Add(time.Second * 10).Unix(),
+		"exp":  time.Now().Add(time.Hour * 24 * 14).Unix(),
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)

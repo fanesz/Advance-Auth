@@ -19,7 +19,7 @@ This is a personal project I created for learning the Go programming language. I
 - /verify/validate - To validate the verify token
 
 ## Feature
-- Middleware - Auth middleware feature using JSON Web Token (JWT) that stores the user's UUID with an expiration date of 30 days.
+- Middleware - Auth middleware feature using JSON Web Token (JWT) that stores the user's UUID with an expiration date of 14 days.
 - Mailer - Uses SMTP API to send emails to users.
 - Check IP Address and Device when performing actions related to user account data.
 - Email notifications if there is a login from a different IP Address or Device.
