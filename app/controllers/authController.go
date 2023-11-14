@@ -86,7 +86,7 @@ func (a *AuthController) Login(c *gin.Context) {
 
 	// when user already logged in
 	if count != 0 {
-		query.Where("ip_address = ? AND device = ?", reqInfo.IPAddress, reqInfo.Device)
+		query.Where("UUID = ? AND ip_address = ? AND device = ?", validateLogin.UUID, reqInfo.IPAddress, reqInfo.Device)
 		val, count = handler.QueryValidator(query, c, true)
 		if !val && count == -1 {
 			return
