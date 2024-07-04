@@ -1,3 +1,5 @@
+Update: Take a the newest version: [golang-restful-api-templete](https://github.com/fanesz/golang-restful-api-templete)
+
 # ADVANCE AUTH with Golang
 This is a personal project I created for learning the Go programming language. I built this project over 3 days with no prior experience or knowledge of the Go language. I used online resources such as YouTube for basic concepts and project flow. I also learned about working with databases by reading the documentation provided by the library. All the features in this project were developed from scratch based on my own ideas and have not been implemented in real-world cases before.
 
